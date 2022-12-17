@@ -145,18 +145,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Externals\glad.c" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\Core\ElementBuffer.cpp" />
-    <ClCompile Include="src\Core\ShaderProgram.cpp" />
-    <ClCompile Include="src\Core\VertexArray.cpp" />
-    <ClCompile Include="src\Core\VertexBuffer.cpp" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="Externals\includes\gladES\glad.h" />
+    <ClInclude Include="Externals\includes\GLFW\glfw3.h" />
+    <ClInclude Include="Externals\includes\GLFW\glfw3native.h" />
+    <ClInclude Include="Externals\includes\KHR\khrplatform.h" />
+    <ClInclude Include="src\application.hpp" />
     <ClInclude Include="src\Core\ElementBuffer.hpp" />
     <ClInclude Include="src\Core\ShaderProgram.hpp" />
     <ClInclude Include="src\Core\VertexArray.hpp" />
     <ClInclude Include="src\Core\VertexBuffer.hpp" />
+    <ClInclude Include="src\drawables\square.hpp" />
+    <ClInclude Include="src\opengl_objects\ElementBuffer.hpp" />
+    <ClInclude Include="src\opengl_objects\ShaderProgram.hpp" />
+    <ClInclude Include="src\opengl_objects\VertexArray.hpp" />
+    <ClInclude Include="src\opengl_objects\VertexBuffer.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\shaders\default.frag" />
+    <None Include="src\shaders\default.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Externals\glad.c" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\application.cpp" />
+    <ClCompile Include="src\drawables\square.cpp" />
+    <ClCompile Include="src\opengl_objects\ElementBuffer.cpp" />
+    <ClCompile Include="src\opengl_objects\ShaderProgram.cpp" />
+    <ClCompile Include="src\opengl_objects\VertexArray.cpp" />
+    <ClCompile Include="src\opengl_objects\VertexBuffer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

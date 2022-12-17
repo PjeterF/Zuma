@@ -1,47 +1,43 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "src/Core/ShaderProgram.hpp"
+#include "src/opengl_objects/ShaderProgram.hpp"
+#include "src/drawables/square.hpp"
+#include <vector>
 #include <iostream>
+
+#define WIDTH 1000
+#define HEIGHT 1000
+
+void windowResizeCallback(GLFWwindow* window, int width, int height)
+{
+
+}
 
 int main(void)
 {
-   // Engine::ShaderProgram("src/Core/ShaderProgram.hpp", "src/Core/ShaderProgram.hpp");
+    glfwInit();
 
-    GLFWwindow* window;
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Hello World", NULL, NULL);
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
-
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
-
-    /* Make the window's context current */
     glfwMakeContextCurrent(window);
+    gladLoadGL();
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
-    }
+    glViewport(0, 0, WIDTH, HEIGHT);
+    glfwSetFramebufferSizeCallback(window, windowResizeCallback);
+    
+    Engine::ShaderProgram shad1("src/shaders/default.vert", "src/shaders/default.frag");
+    Engine::Square square1(0, 0, 0.2, shad1.getId());
 
-    Engine::ShaderProgram("src/Core/ShaderProgram.hpp", "src/Core/ShaderProgram.hpp");
 
-    /* Loop until the user closes the window */
+
     while (!glfwWindowShouldClose(window))
     {
-        /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.0, 0.0, 0.1, 0.0);
 
-        /* Swap front and back buffers */
+        square1.draw();
+
         glfwSwapBuffers(window);
-
-        /* Poll for and process events */
         glfwPollEvents();
     }
 

@@ -7,13 +7,46 @@ namespace Engine
 		const char* vertexSource = readFile(vertexSourceFilepath);
 		const char* fragmentSource = readFile(fragmentSourceFilepath);
 
+		//std::cout << vertexSource << std::endl << fragmentSource;
+
 		unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vertexShader, 1, &vertexSource, NULL);
 		glCompileShader(vertexShader);
 
+		GLint success = 0;
+		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+		if (success == GL_FALSE)
+		{
+			GLint maxLength = 0;
+			glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
+
+			// The maxLength includes the NULL character
+			std::vector<GLchar> infoLog(maxLength);
+			glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
+			for (GLchar c : infoLog)
+			{
+				std::cout << c;
+			}
+		}
+
 		unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
 		glCompileShader(fragmentShader);
+
+		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+		if (success == GL_FALSE)
+		{
+			GLint maxLength = 0;
+			glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
+
+			// The maxLength includes the NULL character
+			std::vector<GLchar> infoLog(maxLength);
+			glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
+			for (GLchar c : infoLog)
+			{
+				std::cout << c;
+			}
+		}
 
 		id = glCreateProgram();
 
@@ -35,7 +68,7 @@ namespace Engine
 		glUseProgram(0);
 	}
 
-	unsigned int ShaderProgram::getId()
+	GLuint ShaderProgram::getId()
 	{
 		return id;
 	}

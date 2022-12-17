@@ -1,6 +1,8 @@
-#include <glad/glad.h>
+#include <gladES/glad.h>
 #include <string>
+#include <iostream>
 #include <fstream>
+#include <vector>
 
 namespace Engine
 {
@@ -10,9 +12,9 @@ namespace Engine
 		ShaderProgram(std::string vertexSourceFilepath, std::string fragmentSourceFilepath);
 		void bind();
 		void unbind();
-		unsigned int getId();
+		GLuint getId();
 	private:
 		const char* readFile(std::string filepath);
-		unsigned int id;
+		GLuint id;
 	};
 }
