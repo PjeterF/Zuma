@@ -7,7 +7,7 @@
 
 #include <math.h>
 
-void textureLoader(std::vector<Texture*>* allTextures, std::vector<Texture*>* segmentTextures, SnakeManager* manager)
+void textureLoader(std::vector<Texture*>* allTextures, std::vector<Texture*>* segmentTextures, GameLevel* level)
 {
 	static char filepath[100] = "";
 	
@@ -80,7 +80,11 @@ void textureLoader(std::vector<Texture*>* allTextures, std::vector<Texture*>* se
 			}
 			if (ImGui::Button("Set as shooter texture"))
 			{
-				manager->getShooter()->setTexture(currentTexture);
+				level->shooter->setTexture(currentTexture);
+			}
+			if (ImGui::Button("Set as background"))
+			{
+				level->setBackground(currentTexture);
 			}
 			ImGui::EndPopup();
 		}

@@ -57,3 +57,8 @@ void GameLevel::draw(SpriteRenderer* renderer)
 
 	manager->draw(renderer);
 }
+
+void GameLevel::setBackground(Texture* newBackground)
+{
+	this->background = newBackground;
+}

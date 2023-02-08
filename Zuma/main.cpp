@@ -189,7 +189,7 @@ int main(void)
         }
         if (ImGui::TreeNode("Texture Loader"))
         {
-            textureLoader(&allTextures, &segmentTextures, level1.manager);
+            textureLoader(&allTextures, &segmentTextures, &level1);
             ImGui::TreePop();
             ImGui::Separator();
         }
@@ -241,7 +241,7 @@ int main(void)
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        Sleep(16);
+        Sleep(1);
     }
 
     glfwTerminate();
