@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{870d01ba-ceaa-4f35-b35a-4c9851528642}</ProjectGuid>
+    <RootNamespace>MyGraphicsEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Zuma</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Zuma\Externals\includes;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Zuma\Externals\libs;</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Zuma\Externals\includes;</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Zuma\Externals\libs;</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Zuma\Externals\includes;$(SolutionDir)MyGraphicsEngine\Externals\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Zuma\Externals\libs;$(SolutionDir)MyGraphicsEngine\Externals\libs</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Zuma\Externals\includes;$(SolutionDir)MyGraphicsEngine\Externals\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Zuma\Externals\libs;$(SolutionDir)MyGraphicsEngine\Externals\libs</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Externals\includes\gladES\glad.h" />
+    <ClInclude Include="Externals\includes\glad\glad.h" />
+    <ClInclude Include="Externals\includes\GLFW\glfw3.h" />
+    <ClInclude Include="Externals\includes\GLFW\glfw3native.h" />
+    <ClInclude Include="Externals\includes\imgui\imconfig.h" />
+    <ClInclude Include="Externals\includes\imgui\imgui.h" />
+    <ClInclude Include="Externals\includes\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="Externals\includes\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Externals\includes\imgui\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Externals\includes\imgui\imgui_internal.h" />
+    <ClInclude Include="Externals\includes\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Externals\includes\imgui\imstb_textedit.h" />
+    <ClInclude Include="Externals\includes\imgui\imstb_truetype.h" />
+    <ClInclude Include="Externals\includes\KHR\khrplatform.h" />
+    <ClInclude Include="Externals\stb_image.h" />
+    <ClInclude Include="src\opengl_objects\RenderBuffer.hpp" />
+    <ClInclude Include="src\imguiWidgets.hpp" />
+    <ClInclude Include="src\opengl_objects\FrameBuffer.hpp" />
+    <ClInclude Include="src\application.hpp" />
+    <ClInclude Include="src\Core\ElementBuffer.hpp" />
+    <ClInclude Include="src\Core\ShaderProgram.hpp" />
+    <ClInclude Include="src\Core\VertexArray.hpp" />
+    <ClInclude Include="src\Core\VertexBuffer.hpp" />
+    <ClInclude Include="src\drawables\SpriteRenderer.hpp" />
+    <ClInclude Include="src\opengl_objects\ElementBuffer.hpp" />
+    <ClInclude Include="src\opengl_objects\package.hpp" />
+    <ClInclude Include="src\opengl_objects\ShaderProgram.hpp" />
+    <ClInclude Include="src\opengl_objects\texture.hpp" />
+    <ClInclude Include="src\opengl_objects\VertexArray.hpp" />
+    <ClInclude Include="src\opengl_objects\VertexBuffer.hpp" />
+    <ClInclude Include="src\zumalogic\beziercubicspline.hpp" />
+    <ClInclude Include="src\zumalogic\GameLevel.hpp" />
+    <ClInclude Include="src\zumalogic\GameObject.hpp" />
+    <ClInclude Include="src\zumalogic\GuiElements.hpp" />
+    <ClInclude Include="src\zumalogic\Input.hpp" />
+    <ClInclude Include="src\zumalogic\Shooter.hpp" />
+    <ClInclude Include="src\zumalogic\Shot.hpp" />
+    <ClInclude Include="src\zumalogic\Snake.hpp" />
+    <ClInclude Include="src\zumalogic\SnakeManager.hpp" />
+    <ClInclude Include="src\zumalogic\SnakeSegment.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui.ini" />
+    <None Include="src\shaders\default.frag" />
+    <None Include="src\shaders\default.vert" />
+    <None Include="src\shaders\sprite.frag" />
+    <None Include="src\shaders\sprite.vert" />
+    <None Include="src\shaders\texturedQuad.frag" />
+    <None Include="src\shaders\texturedQuad.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="glad.c" />
+    <ClCompile Include="Externals\includes\imgui\imgui.cpp" />
+    <ClCompile Include="Externals\includes\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Externals\includes\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Externals\includes\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Externals\includes\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Externals\includes\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Externals\includes\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\opengl_objects\RenderBuffer.cpp" />
+    <ClCompile Include="src\opengl_objects\FrameBuffer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\application.cpp" />
+    <ClCompile Include="src\drawables\SpriteRenderer.cpp" />
+    <ClCompile Include="src\opengl_objects\ElementBuffer.cpp" />
+    <ClCompile Include="src\opengl_objects\ShaderProgram.cpp" />
+    <ClCompile Include="src\opengl_objects\texture.cpp" />
+    <ClCompile Include="src\opengl_objects\VertexArray.cpp" />
+    <ClCompile Include="src\opengl_objects\VertexBuffer.cpp" />
+    <ClCompile Include="src\zumalogic\beziercubicspline.cpp" />
+    <ClCompile Include="src\zumalogic\GameLevel.cpp" />
+    <ClCompile Include="src\zumalogic\GameObject.cpp" />
+    <ClCompile Include="src\zumalogic\Shooter.cpp" />
+    <ClCompile Include="src\zumalogic\Snake.cpp" />
+    <ClCompile Include="src\zumalogic\SnakeManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\textures\amogus.png" />
+    <Image Include="src\textures\path3.jpg" />
+    <Image Include="src\textures\path4.jpg" />
+    <Image Include="src\textures\path4.png" />
+    <Image Include="src\textures\red.jpg" />
+    <Image Include="src\textures\red.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
