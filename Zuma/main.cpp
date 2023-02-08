@@ -14,7 +14,8 @@
 #include "src/application.hpp"
 #include "src/zumalogic/GuiElements.hpp"
 #include "src/zumalogic/Snake.hpp"
-#include <Windows.h>
+#include <chrono>
+#include <thread>
 #include "src/zumalogic/Input.hpp"
 #include <ctime>
 #include <math.h>
@@ -241,7 +242,7 @@ int main(void)
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        Sleep(1);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
     }
 
     glfwTerminate();
