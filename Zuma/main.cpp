@@ -5,6 +5,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "src/opengl_objects/ShaderProgram.hpp"
+#include "src/opengl_objects/FrameBuffer.hpp"
 #include "src/zumalogic/beziercubicspline.hpp"
 #include "src/drawables/SpriteRenderer.hpp"
 #include "src/zumalogic/gameobject.hpp"
@@ -94,15 +95,79 @@ int main(void)
     double xpos, ypos;
     glm::vec2 vector;
 
+    FrameBuffer frameBuffer(WIDTH, HEIGHT);
+
+    std::vector<float> ScreenRect = {
+        -1.0f, 1.0f, 0.0f, 1.0f,
+        1.0f, 1.0f, 1.0f, 1.0f,
+        -1.0f, -1.0f, 0.0f, 0.0f,
+        1.0f, -1.0f, 1.0f, 0.0f,
+    };
+
+    std::vector<int> ScreenIndices =
+    {
+        0, 1, 2,
+        1, 2, 3
+    };
+
+    Engine::VertexArray ScreenVAO;
+    ScreenVAO.bind();
+    Engine::VertexBuffer ScreenVBO(ScreenRect);
+    ScreenVBO.bind();
+    Engine::ElementBuffer ScreenEBO(ScreenIndices);
+    ScreenEBO.bind();
+
+    ScreenVAO.setAttributePointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
+    ScreenVAO.setAttributePointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, sizeof(float) * 2);
+
+    Engine::ShaderProgram ScreenProgram("src/shaders/screen.vert", "src/shaders/screen.frag");
+
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     while (!glfwWindowShouldClose(window))
     {
-        time(&begin);
+        /*frameBuffer.bind();
+        glEnable(GL_DEPTH_TEST);*/
 
         glClearColor(0.2, 0.2, 0.2, 0.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        level1.draw(&renderer);
+        /*glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glDisable(GL_DEPTH_TEST);
+        glClearColor(0.5f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        ScreenProgram.bind();
+        ScreenVAO.bind();
+        glBindTexture(GL_TEXTURE_2D, frameBuffer.getTextureID());
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);*/
+
+        if (running)
+        {
+            level1.update(window, angle);
+        }
+
+        glfwGetCursorPos(window, &xpos, &ypos);
+        ypos = HEIGHT - ypos;
+        vector = glm::vec2(xpos, ypos) - level1.shooter->getPosition();
+        vector = glm::normalize(vector);
+        if (xpos >= level1.shooter->getPosition().x && ypos >= level1.shooter->getPosition().y)
+        {
+            angle = atan(vector.y / vector.x) * 57.2958 + 90;
+        }
+        else if (xpos < level1.shooter->getPosition().x && ypos >= level1.shooter->getPosition().y)
+        {
+            angle = 180 - atan(-vector.y / vector.x) * 57.2958 + 90;
+        }
+        else if (xpos < level1.shooter->getPosition().x && ypos < level1.shooter->getPosition().y)
+        {
+            angle = 180 + atan(vector.y / vector.x) * 57.2958 + 90;
+        }
+        else if (xpos >= level1.shooter->getPosition().x && ypos < level1.shooter->getPosition().y)
+        {
+            angle = 360 - atan(-vector.y / vector.x) * 57.2958 + 90;
+        }
 
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
@@ -143,7 +208,6 @@ int main(void)
         ImGui::End();
 
         ImGui::SetNextWindowPos(ImVec2(0, 0));
-        //ImGui::SetNextWindowSize(ImVec2(330, 400));
         ImGui::Begin("Menus", nullptr, ImGuiWindowFlags_NoMove);
 
         
@@ -207,34 +271,6 @@ int main(void)
             ImGui::Separator();
         }
         ImGui::End();
-
-        level1.draw(&renderer);
-
-        glfwGetCursorPos(window, &xpos, &ypos);
-        ypos = HEIGHT-ypos;
-        vector = glm::vec2(xpos, ypos) - level1.shooter->getPosition();
-        vector = glm::normalize(vector);
-        if (xpos >= level1.shooter->getPosition().x && ypos >= level1.shooter->getPosition().y)
-        {
-            angle = atan(vector.y / vector.x) * 57.2958 + 90;
-        }
-        else if (xpos < level1.shooter->getPosition().x && ypos >= level1.shooter->getPosition().y)
-        {
-            angle = 180 - atan(-vector.y / vector.x) * 57.2958 + 90;
-        }
-        else if (xpos < level1.shooter->getPosition().x && ypos < level1.shooter->getPosition().y)
-        {
-            angle = 180 + atan(vector.y / vector.x) * 57.2958 + 90;
-        }
-        else if (xpos >= level1.shooter->getPosition().x && ypos < level1.shooter->getPosition().y)
-        {
-            angle = 360 - atan(-vector.y / vector.x) * 57.2958 + 90;
-        }
-
-        if (running)
-        {
-            level1.update(window, angle);
-        }
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

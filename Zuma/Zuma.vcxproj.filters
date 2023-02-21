@@ -39,9 +39,6 @@
     <ClCompile Include="src\opengl_objects\texture.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\drawables\texturedline.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="Externals\includes\imgui\imgui.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
@@ -143,9 +140,6 @@
     <ClInclude Include="Externals\stb_image.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\drawables\texturedline.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="Externals\includes\imgui\imconfig.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
@@ -174,9 +168,6 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="src\drawables\SpriteRenderer.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="src\drawables\sampledSpriteRenderer.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="src\zumalogic\GameObject.hpp">
@@ -226,26 +217,11 @@
     <None Include="src\shaders\texturedQuad.frag" />
     <None Include="src\shaders\sprite.vert" />
     <None Include="src\shaders\sprite.frag" />
+    <None Include="imgui.ini" />
+    <None Include="src\shaders\screen.vert" />
+    <None Include="src\shaders\screen.frag" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="src\textures\path1.png">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\path1.jpg">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\bricks.jpg">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\asphalt.jpg">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\amogus.jpg">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\leaves.jpg">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
     <Image Include="src\textures\path4.jpg">
       <Filter>Pliki zasobów</Filter>
     </Image>
@@ -255,46 +231,13 @@
     <Image Include="src\textures\red.jpg">
       <Filter>Pliki zasobów</Filter>
     </Image>
-    <Image Include="src\textures\storm.jpg">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
     <Image Include="src\textures\path4.png">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\path5.jpg">
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="src\textures\red.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
-    <Image Include="src\textures\frog.png">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\bricks2.jpg">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\colorbox.jpg">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\forest_path.jpg">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
     <Image Include="src\textures\amogus.png">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\path2.jpg">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\Solid_red.png">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\red_background.png">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\wolf.png">
-      <Filter>Pliki zasobów</Filter>
-    </Image>
-    <Image Include="src\textures\alpha.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

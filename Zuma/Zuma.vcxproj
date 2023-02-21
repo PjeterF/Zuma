@@ -193,6 +193,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
+    <None Include="src\shaders\screen.frag" />
+    <None Include="src\shaders\screen.vert" />
     <None Include="src\shaders\default.frag" />
     <None Include="src\shaders\default.vert" />
     <None Include="src\shaders\sprite.frag" />

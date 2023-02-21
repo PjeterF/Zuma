@@ -40,4 +40,5 @@ private:
 	std::vector<Texture*>* textures;
 	std::list<SnakeSegment*> segments;
 	BezierCubicSpline* route;
+	bool inserting = false;
 };
