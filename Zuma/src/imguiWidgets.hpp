@@ -184,7 +184,7 @@ void shooterEdit(SnakeManager* manager, GLFWwindow* window)
 	manager->getShooter()->setScale(shooterSize);
 	manager->getShooter()->setCurrentOffset(currentOffset);
 	manager->getShooter()->setNextOffset(glm::vec2(nextOffsetX, nextOffsetY));
-	manager->getShooter()->setPosition(glm::vec2(posX, posY));
+	manager->getShooter()->setPosition(posX, posY);
 }
 
 void levelEdit(GameLevel* level)

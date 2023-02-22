@@ -1,8 +1,7 @@
 #include "Shooter.hpp"
 
-Shooter::Shooter(float x, float y, float size, Texture* texture, std::vector<Texture*>* projectileTextures, float projectileSize, float projectileVelocity)
+Shooter::Shooter(float x, float y, float size, Texture* texture, bool collision, std::vector<Texture*>* projectileTextures, float projectileSize, float projectileVelocity) :GameObject(x, y, size, texture, GameObject::generateID(), collision)
 {
-	shooter = new GameObject(x, y, size, texture, GameObject::generateID(), false);
 	this->projectileTextures = projectileTextures;
 	this->projectileSize = projectileSize;
 	this->projectileVelocity = projectileVelocity;
@@ -10,23 +9,23 @@ Shooter::Shooter(float x, float y, float size, Texture* texture, std::vector<Tex
 	this->currentProjectileTag = rand() % projectileTextures->size();
 	this->nextProjectileTag = rand() % projectileTextures->size();
 
-	glm::vec2 direction(cos(glm::radians((float)(shooter->getAngle()) - 90)), sin(glm::radians((float)(shooter->getAngle() - 90))));
+	glm::vec2 direction(cos(glm::radians((float)(this->getAngle()) - 90)), sin(glm::radians((float)(this->getAngle() - 90))));
 	direction = glm::normalize(direction);
-	currentOffset = direction*shooter->getScale();
+	currentOffset = direction* this->getScale();
 	nextOffset = glm::vec2(0, 0);
 }
 
-void Shooter::draw(SpriteRenderer* renderer)
+void Shooter::drawBody(SpriteRenderer* renderer)
 {
-	shooter->draw(renderer);
+	this->draw(renderer);
 	if (projectileTextures->size() == 0)
 	{
 		return;
 	}
 	this->setCurrentOffset(sqrt(currentOffset.x * currentOffset.x + currentOffset.y * currentOffset.y));
 
-	renderer->draw(shooter->getPosition()+ currentOffset, glm::vec2(projectileSize, projectileSize), 0, projectileTextures->at(currentProjectileTag));
-	renderer->draw(shooter->getPosition()+nextOffset, glm::vec2(projectileSize, projectileSize), 0, projectileTextures->at(nextProjectileTag));
+	renderer->draw(this->getPosition() + currentOffset, glm::vec2(projectileSize, projectileSize), 0, projectileTextures->at(currentProjectileTag));
+	renderer->draw(this->getPosition() + nextOffset, glm::vec2(projectileSize, projectileSize), 0, projectileTextures->at(nextProjectileTag));
 }
 
 void Shooter::shoot(float xTarget, float yTarget, int projectileType)
@@ -35,8 +34,8 @@ void Shooter::shoot(float xTarget, float yTarget, int projectileType)
 	{
 		return;
 	}
-	Shot* newShot= new Shot(shooter->getPosition().x+currentOffset.x, shooter->getPosition().y+ currentOffset.y, projectileSize, projectileTextures->at(currentProjectileTag), GameObject::generateID(), true);
-	newShot->setDirection(glm::vec2(xTarget, yTarget) - shooter->getPosition());
+	Shot* newShot= new Shot(this->getPosition().x+currentOffset.x, this->getPosition().y+ currentOffset.y, projectileSize, projectileTextures->at(currentProjectileTag), GameObject::generateID(), true);
+	newShot->setDirection(glm::vec2(xTarget, yTarget) - this->getPosition());
 	newShot->setDirection(glm::normalize(newShot->getDirection()));
 	newShot->setVelocity(this->projectileVelocity);
 	newShot->setTag(currentProjectileTag);
@@ -91,7 +90,7 @@ void Shooter::reroll()
 
 void Shooter::setCurrentOffset(float displacement)
 {
-	glm::vec2 direction(cos(glm::radians((float)(shooter->getAngle()) - 90)), sin(glm::radians((float)(shooter->getAngle() - 90))));
+	glm::vec2 direction(cos(glm::radians((float)(this->getAngle()) - 90)), sin(glm::radians((float)(this->getAngle() - 90))));
 	direction = glm::normalize(direction);
 	currentOffset = displacement * direction;
 }

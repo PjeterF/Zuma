@@ -19,9 +19,6 @@ void SnakeManager::push_front_snake(Snake* snake)
 void SnakeManager::checkForHits()
 {
 	std::vector<Shot*>::iterator it = shooter->getProjectiles()->begin();
-	bool hit = false;
-
-	
 
 	while (it != shooter->getProjectiles()->end())
 	{
@@ -40,7 +37,7 @@ void SnakeManager::checkForHits()
 				{
 					std::list<SnakeSegment*>::iterator it_new = (*it_snake)->insert((*it)->getPosition().x, (*it)->getPosition().y, (*it)->getTag(), it_seg);
 
-					if (this->checkPopingCondition(it_new, it_snake, 3))
+					if (this->checkPopingCondition(it_new, it_snake, popingCount))
 					{
 						this->popSame(it_new, it_snake);
 					}
@@ -90,8 +87,16 @@ void SnakeManager::updatePos()
 			if (sqrt(difference.x * difference.x + difference.y * difference.y) <= Snake::getDeistanceBetweenSegments())
 			{
 				//merge
+				std::list<SnakeSegment*>::iterator pusher_head = (*it_pusher)->getSegments()->begin();
+
 				(*it_next)->getSegments()->splice((*it_next)->getSegments()->end(), *((*it_pusher)->getSegments()));
 				snakes.erase(it_pusher);
+
+				if (this->checkPopingCondition(pusher_head, it_next, this->popingCount))
+				{
+					this->popSame(pusher_head, it_next);
+				}
+
 				return;
 			}
 		}
@@ -130,24 +135,21 @@ bool SnakeManager::checkPopingCondition(std::list<SnakeSegment*>::iterator it, s
 			break;
 		}
 	}
+	while (it_reverse != (*it_snake)->getSegments()->begin())
+	{
+		if ((*it_reverse)->getTag() == tag)
+		{
+			n++;
+			it_reverse--;
+		}
+		else
+		{
+			break;
+		}
+	}
 	if (it_reverse == (*it_snake)->getSegments()->begin() && (*it_reverse)->getTag() == tag)
 	{
 		n++;
-	}
-	else
-	{
-		while (it_reverse != (*it_snake)->getSegments()->begin())
-		{
-			if ((*it_reverse)->getTag() == tag)
-			{
-				n++;
-				it_reverse--;
-			}
-			else
-			{
-				break;
-			}
-		}
 	}
 	
 	if (n >= count)

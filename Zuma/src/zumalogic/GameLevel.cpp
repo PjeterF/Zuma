@@ -6,6 +6,7 @@ GameLevel::GameLevel(BezierCubicSpline* route, Shooter* shooter, Texture* backgr
 	this->shooter = shooter;
 	this->background = background;
 	this->manager = manager;
+	this->ornaments = ornaments;
 
 	if (ornaments != nullptr)
 	{
@@ -43,7 +44,7 @@ void GameLevel::draw(SpriteRenderer* renderer)
 	this->route->drawControlPoints(renderer);
 
 	if(shooter!=nullptr)
-		this->shooter->draw(renderer);
+		this->shooter->drawBody(renderer);
 
 	if(ornaments!=nullptr)
 	{

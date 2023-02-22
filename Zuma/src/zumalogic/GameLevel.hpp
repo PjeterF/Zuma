@@ -19,6 +19,4 @@ public:
 	Texture* background;
 	SnakeManager* manager;
 	std::vector < GameObject*>* ornaments;
-private:
-	
 };

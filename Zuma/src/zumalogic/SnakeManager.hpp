@@ -27,4 +27,5 @@ private:
 	void popSame(std::list<SnakeSegment*>::iterator it, std::list<Snake*>::iterator it_snake);
 	std::list<Snake*> snakes;
 	Shooter* shooter;
+	int popingCount = 3;
 };

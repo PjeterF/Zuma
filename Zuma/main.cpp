@@ -27,11 +27,10 @@
 #define WIDTH 1920
 #define HEIGHT 1080
 
-
 int main(void)
 {
     glfwInit();
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Hello World", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Zuma", NULL, NULL);
 
     glfwSetWindowSize(window, WIDTH, HEIGHT);
 
@@ -71,7 +70,7 @@ int main(void)
 
     BezierCubicSpline* route = new BezierCubicSpline(100, 100, 20, &control_point1, &control_point2, &red, 15);
     Snake* initialSnake = new Snake(20, 2, route, 200, &segmentTextures);
-    Shooter* shooter = new Shooter(1000, 500, 100, &frog, &segmentTextures, initialSnake->getSegmentSize(), 10);
+    Shooter* shooter = new Shooter(1000, 500, 100, &frog, false, &segmentTextures, initialSnake->getSegmentSize(), 10);
     SnakeManager* manager = new SnakeManager(shooter, initialSnake);
     GameLevel level1(route, shooter, &path, nullptr, manager);
 
@@ -127,6 +126,7 @@ int main(void)
 
     while (!glfwWindowShouldClose(window))
     {
+        auto startTime = std::chrono::high_resolution_clock::now();
         /*frameBuffer.bind();
         glEnable(GL_DEPTH_TEST);*/
 
@@ -237,6 +237,12 @@ int main(void)
                 shootingEnabled = true;
             }
         }
+        if (ImGui::TreeNode("Texture Loader"))
+        {
+            textureLoader(&allTextures, &segmentTextures, &level1);
+            ImGui::TreePop();
+            ImGui::Separator();
+        }
         if (ImGui::TreeNode("Route Edit"))
         {
             if (ImGui::Button("Add(LMB)/Remove(Z) segment"))
@@ -249,12 +255,6 @@ int main(void)
                 inputState = InputModes::MOVE_CTRL_POINTS;
                 glfwSetWindowUserPointer(window, level1.route);
             }
-            ImGui::TreePop();
-            ImGui::Separator();
-        }
-        if (ImGui::TreeNode("Texture Loader"))
-        {
-            textureLoader(&allTextures, &segmentTextures, &level1);
             ImGui::TreePop();
             ImGui::Separator();
         }
@@ -278,7 +278,19 @@ int main(void)
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        auto endTime = std::chrono::high_resolution_clock::now();
+
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+
+        std::cout << duration.count() << std::endl;
+        if (duration.count() < 16)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(16 - duration.count()));
+        }
+        else
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(0));
+        }
     }
 
     glfwTerminate();
