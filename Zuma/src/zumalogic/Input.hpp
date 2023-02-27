@@ -5,7 +5,7 @@
 #include "imgui/imgui_impl_opengl3.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "beziercubicspline.hpp"
+#include "CubicBezierSpline.hpp"
 #include "Shooter.hpp"
 
 enum InputModes { NOTHING, ADD_REMOVE_SEGMENT, MOVE_CTRL_POINTS, SHOOT };
@@ -43,7 +43,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     {
         if (key == GLFW_KEY_Z && action == GLFW_PRESS)
         {
-            BezierCubicSpline* spline = (BezierCubicSpline*)glfwGetWindowUserPointer(window);
+            CubicBezierSpline* spline = (CubicBezierSpline*)glfwGetWindowUserPointer(window);
             spline->removeLastSegment();
         }
         break;
@@ -73,14 +73,14 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         {
             if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
             {
-                BezierCubicSpline* spline = (BezierCubicSpline*)glfwGetWindowUserPointer(window);
+                CubicBezierSpline* spline = (CubicBezierSpline*)glfwGetWindowUserPointer(window);
                 spline->addSegment(x, y);
             }
             break;
         }
         case InputModes::MOVE_CTRL_POINTS:
         {
-            BezierCubicSpline* spline = (BezierCubicSpline*)glfwGetWindowUserPointer(window);
+            CubicBezierSpline* spline = (CubicBezierSpline*)glfwGetWindowUserPointer(window);
             if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
             {
                 float delta = 20;

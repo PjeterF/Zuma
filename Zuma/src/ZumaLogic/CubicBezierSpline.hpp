@@ -3,12 +3,12 @@
 #include <glm/vec2.hpp>
 #include <cmath>
 #include <vector>
-#include "../drawables/SpriteRenderer.hpp"
+#include "../Graphics/SpriteRenderer.hpp"
 
-class BezierCubicSpline
+class CubicBezierSpline
 {
 public:
-	BezierCubicSpline(float xInit, float yInit, int samples_per_segment, Texture* texture1, Texture* texture2, Texture* segmentTexture, float control_point_size);
+	CubicBezierSpline(float xInit, float yInit, int samples_per_segment, Texture* texture1, Texture* texture2, Texture* segmentTexture, float control_point_size);
 	int getNumberOfSegments();
 	glm::vec2 getValueAt(float t);
 	std::vector<glm::vec2>* getSampledPoints();

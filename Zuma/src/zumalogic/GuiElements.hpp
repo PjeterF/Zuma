@@ -7,7 +7,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include "glm/vec2.hpp"
-#include "beziercubicspline.hpp"
+#include "CubicBezierSpline.hpp"
 
 #define WIDTH 1000
 #define HEIGHT 1000
@@ -19,12 +19,12 @@ void addSegment(GLFWwindow* window, int button, int action, int mods)
     {
         glfwGetCursorPos(window, &x, &y);
         glm::vec2 converted = glm::vec2(-1 + 2 * (x / (WIDTH)), 1 - 2 * (y / HEIGHT));
-        BezierCubicSpline* spline = (BezierCubicSpline*)glfwGetWindowUserPointer(window);
+        CubicBezierSpline* spline = (CubicBezierSpline*)glfwGetWindowUserPointer(window);
         spline->addSegment(converted.x, converted.y);
     }
 }
 
-void addSegment_button(GLFWwindow* window, BezierCubicSpline* spline)
+void addSegment_button(GLFWwindow* window, CubicBezierSpline* spline)
 {
     static bool addSegment_enabled = false;
     if (ImGui::Button("Add segment"))
@@ -49,7 +49,7 @@ void addSegment_button(GLFWwindow* window, BezierCubicSpline* spline)
     
 
 
-void spline_edit_menu(GLFWwindow* window, BezierCubicSpline* spline)
+void spline_edit_menu(GLFWwindow* window, CubicBezierSpline* spline)
 {
 
     ImGui::Begin("Spline edit");

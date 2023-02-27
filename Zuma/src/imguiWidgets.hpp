@@ -102,7 +102,7 @@ void textureLoader(std::vector<Texture*>* allTextures, std::vector<Texture*>* se
 	}
 }
 
-void snakeEdit(BezierCubicSpline* route, SnakeManager* manager, std::vector<Texture*>* segmentTextures)
+void snakeEdit(CubicBezierSpline* route, SnakeManager* manager, std::vector<Texture*>* segmentTextures)
 {
 	static int numberOfSegments = 1;
 	static float segmentSize = 10;

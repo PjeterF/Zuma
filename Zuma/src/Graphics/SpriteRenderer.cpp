@@ -34,13 +34,13 @@ SpriteRenderer::SpriteRenderer(GLuint shaderProgramID, GLFWwindow* window)
 	indices.push_back(2);
 	indices.push_back(3);
 
-	VAO = new Engine::VertexArray;
+	VAO = new VertexArray;
 	VAO->bind();
 
-	VBO = new Engine::VertexBuffer(vertices);
+	VBO = new VertexBuffer(vertices);
 	VBO->bind();
 
-	EBO = new Engine::ElementBuffer(indices);
+	EBO = new ElementBuffer(indices);
 	EBO->bind();
 
 	VAO->setAttributePointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);

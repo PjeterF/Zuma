@@ -1,7 +1,5 @@
 #include <gladES/glad.h>
 
-namespace Engine
-{
 	class VertexArray
 	{
 	public:
@@ -12,4 +10,3 @@ namespace Engine
 	private:
 		unsigned int id;
 	};
-}

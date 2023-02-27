@@ -4,15 +4,14 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "src/opengl_objects/ShaderProgram.hpp"
-#include "src/opengl_objects/FrameBuffer.hpp"
-#include "src/zumalogic/beziercubicspline.hpp"
-#include "src/drawables/SpriteRenderer.hpp"
+#include "src/OpenGL/ShaderProgram.hpp"
+#include "src/OpenGL/FrameBuffer.hpp"
+#include "src/zumalogic/CubicBezierSpline.hpp"
+#include "src/Graphics/SpriteRenderer.hpp"
 #include "src/zumalogic/gameobject.hpp"
 #include "src/zumalogic/GameLevel.hpp"
 #include <vector>
 #include <iostream>
-#include "src/application.hpp"
 #include "src/zumalogic/GuiElements.hpp"
 #include "src/zumalogic/Snake.hpp"
 #include <chrono>
@@ -39,7 +38,7 @@ int main(void)
 
     glViewport(0, 0, WIDTH, HEIGHT);
 
-    Engine::ShaderProgram spriteShad("src/shaders/sprite.vert", "src/shaders/sprite.frag");
+    ShaderProgram spriteShad("src/shaders/sprite.vert", "src/shaders/sprite.frag");
     SpriteRenderer renderer(spriteShad.getId(), window);
 
     Texture red("src/textures/red.jpg");
@@ -68,7 +67,7 @@ int main(void)
 
     std::vector<int> init = { 0,0,0,1,0,0,0,2,2,1,0,0 };
 
-    BezierCubicSpline* route = new BezierCubicSpline(100, 100, 20, &control_point1, &control_point2, &red, 15);
+    CubicBezierSpline* route = new CubicBezierSpline(100, 100, 20, &control_point1, &control_point2, &red, 15);
     Snake* initialSnake = new Snake(20, 2, route, 200, &segmentTextures);
     Shooter* shooter = new Shooter(1000, 500, 100, &frog, false, &segmentTextures, initialSnake->getSegmentSize(), 10);
     SnakeManager* manager = new SnakeManager(shooter, initialSnake);
@@ -93,33 +92,6 @@ int main(void)
     int segmentType = 0;
     double xpos, ypos;
     glm::vec2 vector;
-
-    FrameBuffer frameBuffer(WIDTH, HEIGHT);
-
-    std::vector<float> ScreenRect = {
-        -1.0f, 1.0f, 0.0f, 1.0f,
-        1.0f, 1.0f, 1.0f, 1.0f,
-        -1.0f, -1.0f, 0.0f, 0.0f,
-        1.0f, -1.0f, 1.0f, 0.0f,
-    };
-
-    std::vector<int> ScreenIndices =
-    {
-        0, 1, 2,
-        1, 2, 3
-    };
-
-    Engine::VertexArray ScreenVAO;
-    ScreenVAO.bind();
-    Engine::VertexBuffer ScreenVBO(ScreenRect);
-    ScreenVBO.bind();
-    Engine::ElementBuffer ScreenEBO(ScreenIndices);
-    ScreenEBO.bind();
-
-    ScreenVAO.setAttributePointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
-    ScreenVAO.setAttributePointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, sizeof(float) * 2);
-
-    Engine::ShaderProgram ScreenProgram("src/shaders/screen.vert", "src/shaders/screen.frag");
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

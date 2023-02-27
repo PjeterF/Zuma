@@ -1,7 +1,5 @@
 #include "VertexArray.hpp"
 
-namespace Engine
-{
 	VertexArray::VertexArray()
 	{
 		glGenVertexArrays(1, &id);
@@ -24,4 +22,3 @@ namespace Engine
 		glVertexAttribPointer(location, componentsPerVertex, type, normalized, stride, (void*)offset);
 		glEnableVertexAttribArray(location);
 	}
-}

@@ -1,8 +1,6 @@
 #include <gladES/glad.h>
 #include <vector>
 
-namespace Engine
-{
 	class VertexBuffer
 	{
 	public:
@@ -13,4 +11,3 @@ namespace Engine
 	private:
 		unsigned int id;
 	};
-}

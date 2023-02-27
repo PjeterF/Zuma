@@ -1,6 +1,6 @@
 #pragma once
-#include "../opengl_objects/texture.hpp"
-#include "../drawables/spriterenderer.hpp"
+#include "../OpenGL/texture.hpp"
+#include "../Graphics/spriterenderer.hpp"
 #include "glm/vec2.hpp"
 #include <math.h>
 
@@ -15,6 +15,8 @@ public:
 	glm::vec2 getScale() { return scale; }
 	void setTexture(Texture* texture);
 	bool checkCollision(GameObject* other);
+	void enableCollistion() { collision = true; }
+	void disableCollistion() { collision = false; }
 	int getID();
 	int getTag() { return tag; }
 	int getAngle() { return angle; }
@@ -24,11 +26,13 @@ public:
 protected:
 	int ID;
 	static int ID_GEN;
-	bool collision;
+
+	Texture* texture;
 	glm::vec2 position;
 	glm::vec2 scale;
 	float angle = 0;
-	Texture* texture;
+
+	bool collision;
 	int tag = -1;
 
 };

@@ -1,7 +1,5 @@
 #include "VertexBuffer.hpp"
 
-namespace Engine
-{
 	VertexBuffer::VertexBuffer(std::vector<float>& vertices)
 	{
 		glGenBuffers(1, &id);
@@ -26,4 +24,3 @@ namespace Engine
 		glGenBuffers(1, &id);
 		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_DYNAMIC_DRAW);
 	}
-}

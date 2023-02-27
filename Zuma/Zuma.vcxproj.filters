@@ -18,25 +18,22 @@
     <ClCompile Include="main.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\opengl_objects\ElementBuffer.cpp">
+    <ClCompile Include="src\OpenGL\ElementBuffer.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\opengl_objects\ShaderProgram.cpp">
+    <ClCompile Include="src\OpenGL\ShaderProgram.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\opengl_objects\VertexArray.cpp">
+    <ClCompile Include="src\OpenGL\VertexArray.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\opengl_objects\VertexBuffer.cpp">
+    <ClCompile Include="src\OpenGL\VertexBuffer.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\application.cpp">
+    <ClCompile Include="src\ZumaLogic\CubicBezierSpline.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\zumalogic\beziercubicspline.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="src\opengl_objects\texture.cpp">
+    <ClCompile Include="src\OpenGL\Texture.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="Externals\includes\imgui\imgui.cpp">
@@ -60,31 +57,34 @@
     <ClCompile Include="Externals\includes\imgui\imgui_widgets.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\drawables\SpriteRenderer.cpp">
+    <ClCompile Include="src\Graphics\SpriteRenderer.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\zumalogic\GameObject.cpp">
+    <ClCompile Include="src\ZumaLogic\GameObject.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\zumalogic\GameLevel.cpp">
+    <ClCompile Include="src\ZumaLogic\GameLevel.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\zumalogic\Snake.cpp">
+    <ClCompile Include="src\ZumaLogic\Snake.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\zumalogic\Shooter.cpp">
+    <ClCompile Include="src\ZumaLogic\Shooter.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\zumalogic\SnakeManager.cpp">
+    <ClCompile Include="src\ZumaLogic\SnakeManager.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="src\opengl_objects\FrameBuffer.cpp">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="src\opengl_objects\RenderBuffer.cpp">
+    <ClCompile Include="src\OpenGL\FrameBuffer.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="glad.c">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ZumaLogic\Shot.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ZumaLogic\SnakeSegment.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,19 +101,16 @@
     <ClInclude Include="src\Core\ElementBuffer.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\opengl_objects\ElementBuffer.hpp">
+    <ClInclude Include="src\OpenGL\ElementBuffer.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\opengl_objects\ShaderProgram.hpp">
+    <ClInclude Include="src\OpenGL\ShaderProgram.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\opengl_objects\VertexArray.hpp">
+    <ClInclude Include="src\OpenGL\VertexArray.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\opengl_objects\VertexBuffer.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="src\application.hpp">
+    <ClInclude Include="src\OpenGL\VertexBuffer.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Externals\includes\gladES\glad.h">
@@ -128,13 +125,13 @@
     <ClInclude Include="Externals\includes\KHR\khrplatform.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\opengl_objects\package.hpp">
+    <ClInclude Include="src\OpenGL\package.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\zumalogic\beziercubicspline.hpp">
+    <ClInclude Include="src\ZumaLogic\CubicBezierSpline.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\opengl_objects\texture.hpp">
+    <ClInclude Include="src\OpenGL\Texture.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Externals\stb_image.h">
@@ -167,43 +164,40 @@
     <ClInclude Include="Externals\includes\imgui\imstb_truetype.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\drawables\SpriteRenderer.hpp">
+    <ClInclude Include="src\Graphics\SpriteRenderer.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\zumalogic\GameObject.hpp">
+    <ClInclude Include="src\ZumaLogic\GameObject.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\zumalogic\GameLevel.hpp">
+    <ClInclude Include="src\ZumaLogic\GameLevel.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\zumalogic\GuiElements.hpp">
+    <ClInclude Include="src\ZumaLogic\GuiElements.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\zumalogic\Input.hpp">
+    <ClInclude Include="src\ZumaLogic\Input.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\zumalogic\Snake.hpp">
+    <ClInclude Include="src\ZumaLogic\Snake.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\zumalogic\Shooter.hpp">
+    <ClInclude Include="src\ZumaLogic\Shooter.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\zumalogic\SnakeManager.hpp">
+    <ClInclude Include="src\ZumaLogic\SnakeManager.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\zumalogic\SnakeSegment.hpp">
+    <ClInclude Include="src\ZumaLogic\SnakeSegment.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\zumalogic\Shot.hpp">
+    <ClInclude Include="src\ZumaLogic\Shot.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="src\opengl_objects\FrameBuffer.hpp">
+    <ClInclude Include="src\OpenGL\FrameBuffer.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="src\imguiWidgets.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="src\opengl_objects\RenderBuffer.hpp">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Externals\includes\glad\glad.h">
@@ -211,24 +205,24 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="src\shaders\default.frag" />
-    <None Include="src\shaders\default.vert" />
-    <None Include="src\shaders\texturedQuad.vert" />
-    <None Include="src\shaders\texturedQuad.frag" />
-    <None Include="src\shaders\sprite.vert" />
-    <None Include="src\shaders\sprite.frag" />
+    <None Include="src\Shaders\default.frag" />
+    <None Include="src\Shaders\default.vert" />
+    <None Include="src\Shaders\texturedQuad.vert" />
+    <None Include="src\Shaders\texturedQuad.frag" />
+    <None Include="src\Shaders\sprite.vert" />
+    <None Include="src\Shaders\sprite.frag" />
     <None Include="imgui.ini" />
-    <None Include="src\shaders\screen.vert" />
-    <None Include="src\shaders\screen.frag" />
+    <None Include="src\Shaders\screen.vert" />
+    <None Include="src\Shaders\screen.frag" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="src\textures\path4.jpg">
+    <Image Include="src\Textures\path4.jpg">
       <Filter>Pliki zasobów</Filter>
     </Image>
-    <Image Include="src\textures\path3.jpg">
+    <Image Include="src\Textures\path3.jpg">
       <Filter>Pliki zasobów</Filter>
     </Image>
-    <Image Include="src\textures\red.jpg">
+    <Image Include="src\Textures\red.jpg">
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="src\textures\path4.png">

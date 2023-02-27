@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameObject.hpp"
-#include "beziercubicspline.hpp"
+#include "CubicBezierSpline.hpp"
 #include "glm/vec2.hpp"
 #include <vector>
 #include <math.h>

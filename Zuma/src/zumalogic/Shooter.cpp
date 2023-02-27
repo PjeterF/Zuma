@@ -34,10 +34,7 @@ void Shooter::shoot(float xTarget, float yTarget, int projectileType)
 	{
 		return;
 	}
-	Shot* newShot= new Shot(this->getPosition().x+currentOffset.x, this->getPosition().y+ currentOffset.y, projectileSize, projectileTextures->at(currentProjectileTag), GameObject::generateID(), true);
-	newShot->setDirection(glm::vec2(xTarget, yTarget) - this->getPosition());
-	newShot->setDirection(glm::normalize(newShot->getDirection()));
-	newShot->setVelocity(this->projectileVelocity);
+	Shot* newShot = new Shot(position.x + currentOffset.x, position.y + currentOffset.y, projectileSize, projectileTextures->at(currentProjectileTag), projectileVelocity, glm::vec2(xTarget, yTarget) - this->getPosition());
 	newShot->setTag(currentProjectileTag);
 	currentProjectileTag = nextProjectileTag;
 	srand(time(NULL));

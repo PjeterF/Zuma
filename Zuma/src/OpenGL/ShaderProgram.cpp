@@ -1,7 +1,5 @@
 #include "ShaderProgram.hpp"
 
-namespace Engine
-{
 	ShaderProgram::ShaderProgram(std::string vertexSourceFilepath, std::string fragmentSourceFilepath)
 	{
 		const char* vertexSource = readFile(vertexSourceFilepath);
@@ -102,4 +100,3 @@ namespace Engine
 			return retu;
 		}
 	}
-}

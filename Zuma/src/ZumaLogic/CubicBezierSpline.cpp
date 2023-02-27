@@ -1,16 +1,16 @@
-#include "beziercubicspline.hpp"
+#include "CubicBezierSpline.hpp"
 
-int BezierCubicSpline::getNumberOfSegments()
+int CubicBezierSpline::getNumberOfSegments()
 {
 	return (int)((controlPoints.size() - 1) / 3);
 }
 
-std::vector<glm::vec2>* BezierCubicSpline::getSampledPoints()
+std::vector<glm::vec2>* CubicBezierSpline::getSampledPoints()
 {
 	return &sampledPoints;
 }
 
-glm::vec2 BezierCubicSpline::getValueAt(float t)
+glm::vec2 CubicBezierSpline::getValueAt(float t)
 {
 
 	if (controlPoints.size() < 4)
@@ -36,7 +36,7 @@ glm::vec2 BezierCubicSpline::getValueAt(float t)
 	return t0 + t1 + t2 + t3;
 }
 
-void BezierCubicSpline::sampleSpline()
+void CubicBezierSpline::sampleSpline()
 {
 	std::vector <glm::vec2> samples;
 	float t;
@@ -53,7 +53,7 @@ void BezierCubicSpline::sampleSpline()
 	sampledPoints = samples;
 }
 
-BezierCubicSpline::BezierCubicSpline(float xInit, float yInit, int samples_per_segment, Texture* texture1, Texture* texture2, Texture* segmentTexture, float control_point_size)
+CubicBezierSpline::CubicBezierSpline(float xInit, float yInit, int samples_per_segment, Texture* texture1, Texture* texture2, Texture* segmentTexture, float control_point_size)
 {
 	this->samples_per_segment = samples_per_segment;
 	this->tex1 = texture1;
@@ -64,12 +64,12 @@ BezierCubicSpline::BezierCubicSpline(float xInit, float yInit, int samples_per_s
 	controlPoints.push_back(glm::vec2(xInit,yInit));
 }
 
-std::vector<glm::vec2>* BezierCubicSpline::getControlPoints()
+std::vector<glm::vec2>* CubicBezierSpline::getControlPoints()
 {
 	return &controlPoints;
 }
 
-void BezierCubicSpline::draw(SpriteRenderer* renderer, float width)
+void CubicBezierSpline::draw(SpriteRenderer* renderer, float width)
 {
 	if (sampledPoints.empty())
 		return;
@@ -91,7 +91,7 @@ void BezierCubicSpline::draw(SpriteRenderer* renderer, float width)
 	}
 }
 
-void BezierCubicSpline::addSegment(float x, float y)
+void CubicBezierSpline::addSegment(float x, float y)
 {
 	glm::vec2 last = controlPoints.back();
 	glm::vec2 direction = glm::vec2(x, y) - last;
@@ -103,7 +103,7 @@ void BezierCubicSpline::addSegment(float x, float y)
 		this->sampleSpline();
 }
 
-void BezierCubicSpline::drawControlPoints(SpriteRenderer* renderer)
+void CubicBezierSpline::drawControlPoints(SpriteRenderer* renderer)
 {
 	for (int i = 0; i < controlPoints.size(); i++)
 	{
@@ -118,7 +118,7 @@ void BezierCubicSpline::drawControlPoints(SpriteRenderer* renderer)
 	}
 }
 
-bool BezierCubicSpline::removeLastSegment()
+bool CubicBezierSpline::removeLastSegment()
 {
 	if (controlPoints.size() > 3)
 	{

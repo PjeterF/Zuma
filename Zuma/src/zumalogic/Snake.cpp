@@ -1,6 +1,6 @@
 #include "Snake.hpp"
 
-Snake::Snake(float segmentSize, float velocity, BezierCubicSpline* route, std::vector<int>& initVector, std::vector<Texture*>* textures)
+Snake::Snake(float segmentSize, float velocity, CubicBezierSpline* route, std::vector<int>& initVector, std::vector<Texture*>* textures)
 {
 	this->segmentSize = segmentSize;
 	this->route = route;
@@ -15,13 +15,15 @@ Snake::Snake(float segmentSize, float velocity, BezierCubicSpline* route, std::v
 	{
 		x = route->getControlPoints()->at(0).x;
 		y = route->getControlPoints()->at(0).y;
-		newSegment = new SnakeSegment(x - (distanceBetweenSegments * i), y, segmentSize, this->textures->at(initVector[i]), GameObject::generateID(), true);
+		newSegment = new SnakeSegment(textures->at(initVector[i]), segmentSize);
 		newSegment->setTag(initVector[i]);
 		segments.push_back(newSegment);
 	}
+
+	last_unspawned = segments.begin();
 }
 
-Snake::Snake(float segmentSize, float velocity, BezierCubicSpline* route, int snakeLength, std::vector<Texture*>* textures)
+Snake::Snake(float segmentSize, float velocity, CubicBezierSpline* route, int snakeLength, std::vector<Texture*>* textures)
 {
 	this->segmentSize = segmentSize;
 	this->route = route;
@@ -31,6 +33,8 @@ Snake::Snake(float segmentSize, float velocity, BezierCubicSpline* route, int sn
 	this->textures = textures;
 
 	initializeRandom(snakeLength);
+
+	last_unspawned = segments.begin();
 }
 
 void Snake::initializeRandom(int n)
@@ -48,7 +52,7 @@ void Snake::initializeRandom(int n)
 		x = route->getControlPoints()->at(0).x;
 		y = route->getControlPoints()->at(0).y;
 		random = rand() % textures->size();
-		newSegment = new SnakeSegment(x - (distanceBetweenSegments * i), y, segmentSize, textures->at(random), GameObject::generateID(), true);
+		newSegment = new SnakeSegment(textures->at(random), segmentSize);
 		newSegment->setTag(random);
 		segments.push_back(newSegment);
 	}
@@ -58,7 +62,10 @@ void Snake::draw(SpriteRenderer* renderer)
 {
 	for (auto element : segments)
 	{
-		element->draw(renderer);
+		if (element->hasSpawned())
+		{
+			element->draw(renderer);
+		}
 	}
 }
 
@@ -79,6 +86,26 @@ void Snake::update()
 		return;
 	}
 
+	if (last_unspawned != segments.end())
+	{
+		if (last_unspawned == segments.begin())
+		{
+			(*last_unspawned)->spawn(route);
+			last_spawned = last_unspawned++;
+		}
+		else
+		{
+			//check spawning condition
+			float distance = glm::distance((*last_spawned)->getPosition(), route->getControlPoints()->at(0));
+			if (distance >= distanceBetweenSegments)
+			{
+				(*last_unspawned)->spawn(route);
+				last_spawned = last_unspawned++;
+			}
+		}
+	}
+	
+
 	glm::vec2 currentPos;
 	glm::vec2 nextSamplePos;
 	glm::vec2 direction;
@@ -88,6 +115,11 @@ void Snake::update()
 	
 	while (it != segments.end())
 	{
+		if (!(*it)->hasSpawned())
+		{
+			break;
+		}
+
 		currentPos = (*it)->getPosition();
 		nextSamplePos = route->getSampledPoints()->at((*it)->getSampleIndex() + 1);
 		direction = nextSamplePos - currentPos;
@@ -139,20 +171,6 @@ void Snake::mergeWith(Snake* other)
 	this->segments.merge(other->segments);
 }
 
-bool Snake::spawnSegment(int type)
-{
-	if (type > textures->size() - 1)
-	{
-		return false;
-	}
-
-	glm::vec2 spawnPoint = route->getControlPoints()->at(0);
-	SnakeSegment* newSnakeSegment = new SnakeSegment(spawnPoint.x, spawnPoint.y, segmentSize, textures->at(type), GameObject::generateID(), true);
-	newSnakeSegment->setTag(type);
-	segments.push_back(newSnakeSegment);
-	return true;
-}
-
 Snake* Snake::split(std::list<SnakeSegment*>::iterator iterator)
 {
 	Snake* newSnake = new Snake();
@@ -160,16 +178,20 @@ Snake* Snake::split(std::list<SnakeSegment*>::iterator iterator)
 	newSnake->segmentSize = this->segmentSize;
 	newSnake->route = this->route;
 	newSnake->textures = this->textures;
+	newSnake->last_spawned = newSnake->getSegments()->end();
+	newSnake->last_unspawned = newSnake->getSegments()->end();
 
 	std::list<SnakeSegment*> newSegments;
 	newSegments.splice(newSegments.begin(), segments, iterator, segments.end());
+
+	last_unspawned = segments.end();
+	last_spawned = segments.end();
 	newSnake->length = newSegments.size();
 	newSnake->segments = newSegments;
 	if (newSnake->segments.size() != 0)
 	{
 		newSnake->headSampleIndex = newSnake->segments.front()->getSampleIndex();
 	}
-
 	return newSnake;
 }
 
@@ -177,7 +199,7 @@ std::list<SnakeSegment*>::iterator Snake::insert(float x, float y, int type, std
 {
 	if (type<textures->size())
 	{
-		SnakeSegment* newSegment = new SnakeSegment(x, y, segmentSize, textures->at(type), GameObject::generateID(), true);
+		SnakeSegment* newSegment = new SnakeSegment(x, y, segmentSize, textures->at(type));
 		newSegment->setSampleIndex((*it)->getSampleIndex());
 		newSegment->setTag(type);
 		segments.insert(it, newSegment);

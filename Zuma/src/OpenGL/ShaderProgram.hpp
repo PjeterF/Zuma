@@ -5,8 +5,6 @@
 #include <fstream>
 #include <vector>
 
-namespace Engine
-{
 	class ShaderProgram
 	{
 	public:
@@ -18,4 +16,3 @@ namespace Engine
 		const char* readFile(std::string filepath);
 		GLuint id;
 	};
-}

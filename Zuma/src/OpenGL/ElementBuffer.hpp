@@ -1,8 +1,6 @@
 #include <gladES/glad.h>
 #include <vector>
 
-namespace Engine
-{
 	class ElementBuffer
 	{
 	public:
@@ -12,4 +10,3 @@ namespace Engine
 	private:
 		unsigned int id;
 	};
-}

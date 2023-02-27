@@ -1,7 +1,5 @@
 #include "ElementBuffer.hpp"
 
-namespace Engine
-{
 	ElementBuffer::ElementBuffer(std::vector<int>& indices)
 	{
 		glGenBuffers(1, &id);
@@ -18,4 +16,3 @@ namespace Engine
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
-}

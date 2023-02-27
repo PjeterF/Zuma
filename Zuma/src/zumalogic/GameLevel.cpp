@@ -1,6 +1,6 @@
 #include "GameLevel.hpp"
 
-GameLevel::GameLevel(BezierCubicSpline* route, Shooter* shooter, Texture* background, std::vector <GameObject*>* ornaments, SnakeManager* manager)
+GameLevel::GameLevel(CubicBezierSpline* route, Shooter* shooter, Texture* background, std::vector <GameObject*>* ornaments, SnakeManager* manager)
 {
 	this->route = route;
 	this->shooter = shooter;
