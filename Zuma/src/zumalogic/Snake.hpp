@@ -31,6 +31,7 @@ public:
 private:
 	Snake() {};
 	void initializeRandom(int n);
+	std::list<SnakeSegment*>::iterator findLastUnspawned();
 	static float distanceBetweenSegments;
 	float segmentSize;
 	int headSampleIndex;

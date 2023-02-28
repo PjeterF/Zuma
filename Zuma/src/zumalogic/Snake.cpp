@@ -93,7 +93,7 @@ void Snake::update()
 			(*last_unspawned)->spawn(route);
 			last_spawned = last_unspawned++;
 		}
-		else
+		else if(last_unspawned!=segments.end())
 		{
 			//check spawning condition
 			float distance = glm::distance((*last_spawned)->getPosition(), route->getControlPoints()->at(0));
@@ -152,7 +152,19 @@ void Snake::update()
 
 }
 
-
+std::list<SnakeSegment*>::iterator Snake::findLastUnspawned()
+{
+	std::list<SnakeSegment*>::iterator it = segments.begin();
+	while (it != segments.end())
+	{
+		if (!(*it)->hasSpawned())
+		{
+			break;
+		}
+		it++;
+	}
+	return it;
+}
 
 glm::vec2 Snake::getHeadPos()
 {
@@ -178,16 +190,24 @@ Snake* Snake::split(std::list<SnakeSegment*>::iterator iterator)
 	newSnake->segmentSize = this->segmentSize;
 	newSnake->route = this->route;
 	newSnake->textures = this->textures;
-	newSnake->last_spawned = newSnake->getSegments()->end();
-	newSnake->last_unspawned = newSnake->getSegments()->end();
 
 	std::list<SnakeSegment*> newSegments;
 	newSegments.splice(newSegments.begin(), segments, iterator, segments.end());
 
-	last_unspawned = segments.end();
-	last_spawned = segments.end();
 	newSnake->length = newSegments.size();
 	newSnake->segments = newSegments;
+
+	newSnake->last_unspawned = newSnake->findLastUnspawned();
+	this->last_unspawned = this->findLastUnspawned();
+
+	this->last_spawned = this->last_unspawned;
+	if(this->last_spawned!=segments.begin())
+		this->last_spawned--;
+
+	newSnake->last_spawned = newSnake->last_unspawned;
+	if(newSnake->last_spawned!=newSnake->segments.begin())
+		newSnake->last_spawned--;
+
 	if (newSnake->segments.size() != 0)
 	{
 		newSnake->headSampleIndex = newSnake->segments.front()->getSampleIndex();
