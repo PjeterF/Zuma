@@ -9,6 +9,16 @@ GameObject::GameObject(float x, float y, float size, Texture* texture, int ID, b
 	this->collision = collision;
 }
 
+GameObject::GameObject(float x, float y, float size, float angle, Texture* texture, bool collision)
+{
+	position = glm::vec2(x, y);
+	scale = glm::vec2(size, size);
+	this->angle = angle;
+	this->texture = texture;
+	this->collision = collision;
+	this->ID = GameObject::generateID();
+}
+
 void GameObject::draw(SpriteRenderer* spriteRenderer)
 {
 	spriteRenderer->draw(position, scale, angle, texture);

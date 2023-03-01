@@ -93,7 +93,7 @@ void Snake::update()
 			(*last_unspawned)->spawn(route);
 			last_spawned = last_unspawned++;
 		}
-		else if(last_unspawned!=segments.end())
+		else 
 		{
 			//check spawning condition
 			float distance = glm::distance((*last_spawned)->getPosition(), route->getControlPoints()->at(0));
@@ -235,8 +235,18 @@ std::list<SnakeSegment*>::iterator Snake::insert(float x, float y, int type, std
 		newSegment->setTag(type);
 		segments.insert(it, newSegment);
 		it--;
+
+		this->last_unspawned = this->findLastUnspawned();
+
+		this->last_spawned = this->last_unspawned;
+		if (this->last_spawned != segments.begin())
+			this->last_spawned--;
+
 		return it;
 	}
+
+	
+
 	return this->segments.end();
 }
 

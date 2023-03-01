@@ -8,6 +8,7 @@ class GameObject
 {
 public:
 	GameObject(float x, float y, float size, Texture* texture, int ID, bool collision);
+	GameObject(float x, float y, float size, float angle, Texture* texture, bool collision);
 	void draw(SpriteRenderer* spriteRenderer);
 	void setPosition(float x, float y);
 	void setScale(float scale);

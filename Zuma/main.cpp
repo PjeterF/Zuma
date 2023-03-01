@@ -179,6 +179,25 @@ int main(void)
         ImGui::EndChild();
         ImGui::End();
 
+        ImGui::SetNextWindowPos(ImVec2(1500, 0));
+        ImGui::Begin("Snakes");
+        ImGui::TextColored(ImVec4(1, 0.5, 1, 1), "Sneks");
+        ImGui::BeginChild("Snaks");
+
+        std::list<Snake*>::iterator it = manager->getSnakes()->begin();
+
+        int n = 0;
+        while (it != level1.manager->getSnakes()->end())
+        {
+            ImGui::Text("%d | %d", n, (*it)->getSegments()->size());
+            it++;
+            n++;
+        }
+
+        ImGui::NextColumn();
+        ImGui::EndChild();
+        ImGui::End();
+
         ImGui::SetNextWindowPos(ImVec2(0, 0));
         ImGui::Begin("Menus", nullptr, ImGuiWindowFlags_NoMove);
 
