@@ -89,6 +89,7 @@ void SnakeManager::updatePos()
 				//merge
 				std::list<SnakeSegment*>::iterator pusher_head = (*it_pusher)->getSegments()->begin();
 
+				//TODO changing spawn iterator
 				(*it_next)->getSegments()->splice((*it_next)->getSegments()->end(), *((*it_pusher)->getSegments()));
 				snakes.erase(it_pusher);
 

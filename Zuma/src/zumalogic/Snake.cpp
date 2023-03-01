@@ -244,10 +244,17 @@ std::list<SnakeSegment*>::iterator Snake::insert(float x, float y, int type, std
 
 		return it;
 	}
+	else
+	{
+		this->last_unspawned = this->findLastUnspawned();
 
-	
+		this->last_spawned = this->last_unspawned;
+		if (this->last_spawned != segments.begin())
+			this->last_spawned--;
 
-	return this->segments.end();
+		return this->segments.end();
+	}
+
 }
 
 Texture* Snake::getTexture(int index)
