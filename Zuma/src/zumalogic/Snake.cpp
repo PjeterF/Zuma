@@ -181,6 +181,17 @@ glm::vec2 Snake::getTailPos()
 void Snake::mergeWith(Snake* other)
 {
 	this->segments.merge(other->segments);
+
+	this->last_unspawned = this->findLastUnspawned();
+	other->last_unspawned = other->findLastUnspawned();
+
+	this->last_spawned = this->last_unspawned;
+	if (this->last_spawned != segments.begin())
+		this->last_spawned--;
+
+	other->last_spawned = other->last_unspawned;
+	if (other->last_spawned != other->segments.begin())
+		other->last_spawned--;
 }
 
 Snake* Snake::split(std::list<SnakeSegment*>::iterator iterator)
