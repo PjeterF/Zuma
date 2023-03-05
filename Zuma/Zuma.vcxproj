@@ -188,6 +188,7 @@
     <ClInclude Include="src\ZumaLogic\Snake.hpp" />
     <ClInclude Include="src\ZumaLogic\SnakeManager.hpp" />
     <ClInclude Include="src\ZumaLogic\SnakeSegment.hpp" />
+    <ClInclude Include="src\Managers\TexturesManager.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
@@ -225,6 +226,7 @@
     <ClCompile Include="src\ZumaLogic\Snake.cpp" />
     <ClCompile Include="src\ZumaLogic\SnakeManager.cpp" />
     <ClCompile Include="src\ZumaLogic\SnakeSegment.cpp" />
+    <ClCompile Include="src\Managers\TexturesManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="src\textures\amogus.png" />

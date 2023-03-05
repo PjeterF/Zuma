@@ -180,7 +180,7 @@ glm::vec2 Snake::getTailPos()
 
 void Snake::mergeWith(Snake* other)
 {
-	this->segments.merge(other->segments);
+	this->segments.splice(this->segments.end(), other->segments);
 
 	this->last_unspawned = this->findLastUnspawned();
 	other->last_unspawned = other->findLastUnspawned();

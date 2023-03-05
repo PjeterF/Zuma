@@ -69,7 +69,8 @@ void SnakeManager::updatePos()
 
 		if ((*it_pusher)->getSegments()->size() == 0)
 		{
-			snakes.erase(snakes.begin());
+			snakes.erase(it_pusher);
+
 			return;
 		}
 
@@ -80,6 +81,7 @@ void SnakeManager::updatePos()
 			if ((*it_next)->getSegments()->size() == 0)
 			{
 				snakes.erase(it_next);
+
 				return;
 			}
 			glm::vec2 difference=(*it_next)->getTailPos()-(*it_pusher)->getHeadPos();
@@ -88,16 +90,13 @@ void SnakeManager::updatePos()
 			{
 				//merge
 				std::list<SnakeSegment*>::iterator pusher_head = (*it_pusher)->getSegments()->begin();
-
-				//TODO changing spawn iterator
-				(*it_next)->getSegments()->splice((*it_next)->getSegments()->end(), *((*it_pusher)->getSegments()));
-				snakes.erase(it_pusher);
+				(*it_next)->mergeWith((*it_pusher));
 
 				if (this->checkPopingCondition(pusher_head, it_next, this->popingCount))
 				{
 					this->popSame(pusher_head, it_next);
 				}
-
+				snakes.erase(it_pusher);
 				return;
 			}
 		}
