@@ -40,6 +40,7 @@ int main(void)
     glViewport(0, 0, WIDTH, HEIGHT);
 
     ShaderProgram spriteShad("src/shaders/sprite.vert", "src/shaders/sprite.frag");
+    ShaderProgram screenShad("src/shaders/screen.vert", "src/shaders/screen.frag");
     SpriteRenderer renderer(spriteShad.getId(), window);
     TexturesManager texturesManager;
 
@@ -86,6 +87,26 @@ int main(void)
 
     setupCallbacks(window);
 
+    std::vector<float> screenVertices = {
+        -1.0f,  1.0f,  0.0f, 1.0f,
+        -1.0f, -1.0f,  0.0f, 0.0f,
+         1.0f, -1.0f,  1.0f, 0.0f,
+
+        -1.0f,  1.0f,  0.0f, 1.0f,
+         1.0f, -1.0f,  1.0f, 0.0f,
+         1.0f,  1.0f,  1.0f, 1.0f
+    };
+
+    VertexArray screenVAO;
+    screenVAO.bind();
+    VertexBuffer screenVBO(screenVertices);
+    screenVBO.bind();
+    screenVAO.setAttributePointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
+    screenVAO.setAttributePointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, sizeof(float) * 2);
+    screenVAO.unbind();
+
+    FrameBuffer screenBuffer(WIDTH, HEIGHT);
+
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -110,21 +131,23 @@ int main(void)
     while (!glfwWindowShouldClose(window))
     {
         auto startTime = std::chrono::high_resolution_clock::now();
-        /*frameBuffer.bind();
-        glEnable(GL_DEPTH_TEST);*/
 
-        glClearColor(0.15, 0.15, 0.15, 0.0);
+        //screenBuffer.bindFrameBuffer();
+        glClearColor(0.15, 0.15, 0.15, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         level1.draw(&renderer);
-        /*glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glDisable(GL_DEPTH_TEST);
-        glClearColor(0.5f, 1.0f, 1.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        ScreenProgram.bind();
-        ScreenVAO.bind();
-        glBindTexture(GL_TEXTURE_2D, frameBuffer.getTextureID());
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);*/
+
+        /*screenBuffer.unbindFrameBuffer();
+        glClearColor(0.15, 0.15, 0.15, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        screenShad.bind();
+        std::cout << "TEX:" << screenBuffer.getTextureID() << std::endl;
+        glBindTexture(GL_TEXTURE_2D, screenBuffer.getTextureID());
+        screenVAO.bind();
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+        screenVAO.unbind();*/
 
         if (running)
         {
@@ -241,7 +264,7 @@ int main(void)
         }
         if (ImGui::TreeNode("Texture Loader"))
         {
-            textureLoader(&allTextures, &segmentTextures, &level1);
+            textureLoader(&texturesManager, &segmentTextures, &level1);
             ImGui::TreePop();
             ImGui::Separator();
         }
