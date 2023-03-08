@@ -22,6 +22,7 @@
 #include "src/zumalogic/Shooter.hpp"
 #include "src/zumalogic/SnakeManager.hpp"
 #include "src//imguiWidgets.hpp"
+#include "src/Managers/TexturesManager.hpp"
 
 #define WIDTH 1920
 #define HEIGHT 1080
@@ -40,6 +41,16 @@ int main(void)
 
     ShaderProgram spriteShad("src/shaders/sprite.vert", "src/shaders/sprite.frag");
     SpriteRenderer renderer(spriteShad.getId(), window);
+    TexturesManager texturesManager;
+
+    texturesManager.createTexture("red", "src/textures/red.jpg");
+    texturesManager.createTexture("path", "src/textures/path4.jpg");
+    texturesManager.createTexture("frog", "src/textures/frog.png");
+    texturesManager.createTexture("control_point1", "src/textures/control_point.png");
+    texturesManager.createTexture("control_point2", "src/textures/control_point2.png");
+    texturesManager.createTexture("marble1", "src/textures/marble1.png");
+    texturesManager.createTexture("marble2", "src/textures/marble2.png");
+    texturesManager.createTexture("marble3", "src/textures/marble3.png");
 
     Texture red("src/textures/red.jpg");
     Texture path("src/textures/path4.jpg");
@@ -51,27 +62,27 @@ int main(void)
     Texture marble3("src/textures/marble3.png");
 
     std::vector<Texture*> allTextures;
-    allTextures.push_back(&red);
-    allTextures.push_back(&path);
-    allTextures.push_back(&frog);
-    allTextures.push_back(&control_point1);
-    allTextures.push_back(&control_point2);
-    allTextures.push_back(&marble1);
-    allTextures.push_back(&marble2);
-    allTextures.push_back(&marble3);
+    allTextures.push_back(texturesManager.getTexture("red"));
+    allTextures.push_back(texturesManager.getTexture("path"));
+    allTextures.push_back(texturesManager.getTexture("frog"));
+    allTextures.push_back(texturesManager.getTexture("control_point1"));
+    allTextures.push_back(texturesManager.getTexture("control_point2"));
+    allTextures.push_back(texturesManager.getTexture("marble1"));
+    allTextures.push_back(texturesManager.getTexture("marble2"));
+    allTextures.push_back(texturesManager.getTexture("marble3"));
 
     std::vector<Texture*> segmentTextures;
-    segmentTextures.push_back(&marble1);
-    segmentTextures.push_back(&marble2);
-    segmentTextures.push_back(&marble3);
+    segmentTextures.push_back(texturesManager.getTexture("marble1"));
+    segmentTextures.push_back(texturesManager.getTexture("marble2"));
+    segmentTextures.push_back(texturesManager.getTexture("marble3"));
 
     std::vector<int> init = { 0,0,0,1,0,0,0,2,2,1,0,0 };
 
-    CubicBezierSpline* route = new CubicBezierSpline(100, 100, 20, &control_point1, &control_point2, &red, 15);
+    CubicBezierSpline* route = new CubicBezierSpline(100, 100, 20, texturesManager.getTexture("control_point1"), texturesManager.getTexture("control_point2"), &red, 15);
     Snake* initialSnake = new Snake(20, 2, route, 200, &segmentTextures);
-    Shooter* shooter = new Shooter(1000, 500, 100, &frog, false, &segmentTextures, initialSnake->getSegmentSize(), 10);
+    Shooter* shooter = new Shooter(1000, 500, 100, texturesManager.getTexture("frog"), false, &segmentTextures, initialSnake->getSegmentSize(), 10);
     SnakeManager* manager = new SnakeManager(shooter, initialSnake);
-    GameLevel level1(route, shooter, &path, nullptr, manager);
+    GameLevel level1(route, shooter, nullptr, nullptr, manager);
 
     setupCallbacks(window);
 
@@ -102,7 +113,7 @@ int main(void)
         /*frameBuffer.bind();
         glEnable(GL_DEPTH_TEST);*/
 
-        glClearColor(0.2, 0.2, 0.2, 0.0);
+        glClearColor(0.15, 0.15, 0.15, 0.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         level1.draw(&renderer);

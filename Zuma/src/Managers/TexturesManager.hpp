@@ -10,7 +10,7 @@ public:
 	bool createTexture(std::string id, std::string texturePath);
 	bool deleteTexture(std::string id);
 	Texture* getTexture(std::string id);
-
+private:
 	std::map<std::string, Texture*> textures;
 };
 

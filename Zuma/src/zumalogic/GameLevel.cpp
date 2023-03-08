@@ -28,15 +28,18 @@ void GameLevel::draw(SpriteRenderer* renderer)
 	int width, height;
 	glfwGetWindowSize(renderer->getWindowPointer(), &width, &height);
 
-	int n, m;
-	n = width / background->getWidth();
-	m = height / background->getHeight();
-
-	for (int i = 0; i < n; i++)
+	if(background!=nullptr)
 	{
-		for (int j = 0; j < m; j++)
+		int n, m;
+		n = width / background->getWidth();
+		m = height / background->getHeight();
+
+		for (int i = 0; i < n; i++)
 		{
-			renderer->draw(glm::vec2(i * 2 * background->getWidth(), j * 2 * background->getHeight()), glm::vec2(background->getWidth(), background->getHeight()), 0, this->background);
+			for (int j = 0; j < m; j++)
+			{
+				renderer->draw(glm::vec2(i * 2 * background->getWidth(), j * 2 * background->getHeight()), glm::vec2(background->getWidth(), background->getHeight()), 0, this->background);
+			}
 		}
 	}
 
