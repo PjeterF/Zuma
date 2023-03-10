@@ -1,5 +1,6 @@
 #pragma once
 #include "zumalogic/SnakeManager.hpp"
+#include "Managers/TexturesManager.hpp"
 
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_glfw.h"
@@ -7,9 +8,10 @@
 
 #include <math.h>
 
-void textureLoader(std::vector<Texture*>* allTextures, std::vector<Texture*>* segmentTextures, GameLevel* level)
+void textureLoader(TexturesManager* allTextures, std::vector<Texture*>* segmentTextures, GameLevel* level)
 {
 	static char filepath[100] = "";
+	static char textureName[100] = "";
 	
 	ImVec2 windowSize = ImGui::GetWindowSize();
 	int imageSize = 50;
@@ -27,13 +29,13 @@ void textureLoader(std::vector<Texture*>* allTextures, std::vector<Texture*>* se
 		if (newTexture->getId() != 0)
 		{
 			succesfulLoad = true;
-			allTextures->push_back(newTexture);
+			allTextures->createTexture(textureName, filepath);
+			std::fill_n(textureName, 100, 0);
 			std::fill_n(filepath, 100, 0);
 		}
 		else
 		{
 			succesfulLoad = false;
-			delete newTexture;
 		}
 
 	}
@@ -49,11 +51,13 @@ void textureLoader(std::vector<Texture*>* allTextures, std::vector<Texture*>* se
 	}
 
 	std::vector<std::string> popupIDs;
-	for (int i = 0; i < allTextures->size(); i++)
+	std::map<std::string, Texture*>::iterator it = allTextures->begin();
+	int i = 0;
+	while(it!=allTextures->end())
 	{
 		popupIDs.push_back("");
 		popupIDs[i].append(1, i);
-		Texture* currentTexture = allTextures->at(i);
+		Texture* currentTexture = (*it).second;
 
 		ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
 		if(ImGui::ImageButton((ImTextureID)currentTexture->getId(), ImVec2(imageSize, imageSize)))
@@ -99,6 +103,8 @@ void textureLoader(std::vector<Texture*>* allTextures, std::vector<Texture*>* se
 		{
 			ImGui::SameLine();
 		}
+		i++;
+		it++;
 	}
 }
 

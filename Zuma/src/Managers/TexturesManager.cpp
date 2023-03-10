@@ -41,3 +41,13 @@ Texture* TexturesManager::getTexture(std::string id)
 		return nullptr;
 	}
 }
+
+std::map<std::string, Texture*>::iterator TexturesManager::begin()
+{
+	return textures.begin();
+}
+
+std::map<std::string, Texture*>::iterator TexturesManager::end()
+{
+	return textures.end();
+}
