@@ -11,6 +11,7 @@
 enum InputModes { NOTHING, ADD_REMOVE_SEGMENT, MOVE_CTRL_POINTS, SHOOT };
 static int inputState = InputModes::NOTHING;
 static int splineIndex = -1;
+static bool movingCtrlPoint = false;
 
 void cursor_move_callback(GLFWwindow* window, double xpos, double ypos);
 void window_size_callback(GLFWwindow* window, int width, int height);
@@ -28,6 +29,14 @@ void setupCallbacks(GLFWwindow* window)
 void cursor_move_callback(GLFWwindow* window, double xpos, double ypos)
 {
    //std::cout << xpos << ", " << ypos << "\n";
+    if (movingCtrlPoint)
+    {
+        int width, height;
+        glfwGetWindowSize(window, &width, &height);
+        CubicBezierSpline* spline = (CubicBezierSpline*)glfwGetWindowUserPointer(window);
+        spline->getControlPoints()->at(splineIndex) = glm::vec2(xpos, height-ypos);
+        spline->sampleSpline();
+    }
 }
 
 void window_size_callback(GLFWwindow* window, int width, int height)
@@ -91,6 +100,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
                     if (x > points->at(i).x - delta && x < points->at(i).x + delta &&
                         y > points->at(i).y - delta && y < points->at(i).y + delta)
                     {
+                        movingCtrlPoint = true;
                         splineIndex = i;
                         break;
                     }
@@ -99,6 +109,7 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
             if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE && splineIndex != -1)
             {
+                movingCtrlPoint = false;
                 spline->getControlPoints()->at(splineIndex) = glm::vec2(x, y);
                 spline->sampleSpline();
                 splineIndex = -1;
