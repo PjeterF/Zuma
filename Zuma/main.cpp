@@ -88,19 +88,23 @@ int main(void)
     setupCallbacks(window);
 
     std::vector<float> screenVertices = {
-        -1.0f,  1.0f,  0.0f, 1.0f,
-        -1.0f, -1.0f,  0.0f, 0.0f,
-         1.0f, -1.0f,  1.0f, 0.0f,
+        -1.0f,  1.0f, 0.0f, 1.0f,
+        1.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, -1.0f, 1.0f, 0.0f,
+        -1.0f,  -1.0f, 0.0f, 0.0f,
+    };
 
-        -1.0f,  1.0f,  0.0f, 1.0f,
-         1.0f, -1.0f,  1.0f, 0.0f,
-         1.0f,  1.0f,  1.0f, 1.0f
+    std::vector<int> screenIndices = {
+        0, 1, 2,
+        0, 2, 3
     };
 
     VertexArray screenVAO;
     screenVAO.bind();
     VertexBuffer screenVBO(screenVertices);
     screenVBO.bind();
+    ElementBuffer screenEBO(screenIndices);
+    screenEBO.bind();
     screenVAO.setAttributePointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
     screenVAO.setAttributePointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, sizeof(float) * 2);
     screenVAO.unbind();
@@ -110,7 +114,7 @@ int main(void)
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
-    //ImGui::StyleColorsClassic();
+    ImGui::StyleColorsClassic();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 300 es"); 
 
@@ -132,27 +136,31 @@ int main(void)
     {
         auto startTime = std::chrono::high_resolution_clock::now();
 
-        //screenBuffer.bindFrameBuffer();
+        screenBuffer.bind();
+        glEnable(GL_DEPTH_TEST);
         glClearColor(0.15, 0.15, 0.15, 1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         level1.draw(&renderer);
 
-        /*screenBuffer.unbindFrameBuffer();
+        screenBuffer.unbind();
+        glDisable(GL_DEPTH_TEST);
         glClearColor(0.15, 0.15, 0.15, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT);
 
-        screenShad.bind();
         std::cout << "TEX:" << screenBuffer.getTextureID() << std::endl;
-        glBindTexture(GL_TEXTURE_2D, screenBuffer.getTextureID());
+        screenShad.bind();
         screenVAO.bind();
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        screenVAO.unbind();*/
+        screenBuffer.bindTexture();
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        screenVAO.unbind();
 
         if (running)
         {
             level1.update(window, angle);
         }
+
+        auto endTime = std::chrono::high_resolution_clock::now();
 
         glfwGetCursorPos(window, &xpos, &ypos);
         ypos = HEIGHT - ypos;
@@ -302,8 +310,6 @@ int main(void)
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-
-        auto endTime = std::chrono::high_resolution_clock::now();
 
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
 

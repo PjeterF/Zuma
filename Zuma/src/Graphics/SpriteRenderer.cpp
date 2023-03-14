@@ -61,8 +61,6 @@ void SpriteRenderer::draw(glm::vec2 position, glm::vec2 scale, float angle, Text
 	}
 	float aspectRatio = width / height;
 
-
-	
 	//transform = glm::ortho(-aspectRatio, aspectRatio, -1.0f, 1.0f, -1.0f, 1.0f);
 	transform = glm::ortho(0.0f, (float)width, 0.0f, (float)height, -1.0f, 1.0f);
 	//transform = glm::perspective(glm::radians(45.0f), aspectRatio, 0.1f, 100.0f);
